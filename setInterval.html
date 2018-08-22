@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div1{
+            width: 200px;
+            height: 200px;
+            background: #ff0000;
+
+        }
+    </style>
+</head>
+<body>
+<div id="div1">我爱你亲爱的姑娘</div>
+<script>
+    // window.scrollTo(0,100);
+    // alert(123);
+    //定时器以及如何清除
+    var n = 1;
+    var timer = setInterval(function(){
+        if(n >=5){
+            clearInterval(timer);
+        }
+        console.log(n++)
+    },1000);
+    //只执行一次 延迟
+    var n =1 ;
+    setTimeout(function(){
+        console.log(n++)
+    },1000)
+
+
+
+</script>
+</body>
+</html>
