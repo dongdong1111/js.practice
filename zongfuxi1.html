@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div1{
+            width: 200px;
+            height: 400px;
+            background: #ffff00;
+            /*float: left;*/
+            /*opacity: .5;*/
+        }
+        #div2{
+            height: 400px;
+            background: #00ff00;
+            /*margin-left: 210px;*/
+            flex: 1;
+        }
+        #div3{
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+<!--<form action="user/login" onsubmit="alert(123); return false;">-->
+    <!--<lable>用户名：<input type="text" id="username" name="username"></lable>-->
+    <!--<lable>密码：<input type="password"></lable>-->
+    <!--学校：<select>-->
+    <!--<option value="">林大</option>-->
+    <!--<option value="">黑大</option>-->
+    <!--<input type="submit">-->
+    <!--<input type="reset">-->
+<!--</select>-->
+    <!--<button type="button">提交11</button>-->
+<!--</form>-->
+<div id="div3">
+    <div id="div1"></div>
+    <div id="div2"></div>
+</div>
+
+<script>
+    var a;
+    console.log(a);
+    //undefined
+    var oDiv = document.getElementById("div1");
+    console.log(oDiv);
+    //null
+    var oObj1 = document.getElementById("id");
+    var oObj2 = document.getElementsByTagName("div");
+    document.getElementsByClassName("aa");//兼容性
+    document.getElementsByName("username");//兼容性
+    document.querySelector("id");//兼容性
+    document.querySelectorAll(".aa");//兼容性
+    addEvent(oDiv1,"click",function(){
+        alert(this===window);
+    });
+    //封装函数
+    function addEvent (elem,type,handler){
+        if(elem.addEventListener){
+            elem.addEventListener(type,handler);
+        }else if(elem.attachEvent){
+            elem.attachEvent("on" + type,handler);
+        }else{
+            elem["on" + type] = handler;//elem.onclick = function(){}
+        }
+    }
+    //解决方法
+    function fn (arg1,arg2){
+        console.log(this);//指向window
+        console.log(arg1);
+        console.log(arg2);
+    }
+    var obj = {
+        name:"zhangsan",
+        age:18
+    };
+    fn.call(obj,"123","456");
+    fn.apply(obj,["123","456"]);
+    fn.bind(obj,"123","456")();//只改变指向不会立马执行
+</script>
+</body>
+</html>
