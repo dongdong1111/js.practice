@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>轮播图</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        li{
+            list-style: none;
+        }
+        #container{
+            width: 520px;
+            height: 280px;
+            position: relative;
+            margin: 100px auto;
+        }
+        #imgs img{
+            display:none;
+        }
+        #imgs .selected{
+            display: block;
+        }
+        #nav li,#arrows span{
+            width: 20px;
+            height: 20px;
+            background: #000;
+            color: #fff;
+            float: left;
+            margin-right: 10px;
+            text-align: center;
+            line-height: 20px;
+           cursor: pointer;
+        }
+        #nav .nav-selected{
+            background: orange;
+        }
+        #nav{
+            position: absolute;
+            right: 20px;
+            bottom: 10px;
+        }
+        #arrows{
+            position: absolute;
+            left: 20px;
+            bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="imgs">
+            <img src="images/1.jpg" alt="" class="selected">
+            <img src="images/2.jpg" alt="">
+            <img src="images/3.jpg" alt="">
+            <img src="images/4.jpg" alt="">
+        </div>
+        <ul id="nav">
+            <li class="nav-selected">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+        <div id="arrows">
+            <span id="prev">&lt</span>
+            <span id="next">&gt</span>
+        </div>
+    </div>
+    <script>
+        var oNav = document.getElementById('nav');
+        var aLi = oNav.getElementsByTagName('li');
+        var oImgs = document.getElementById('imgs');
+        var aImg = oImgs.getElementsByTagName('img');
+        var oPrev = document.getElementById('prev');
+        var oNext = document.getElementById('next');
+        var oContainer = document.getElementById('container')
+        var iNowindex = 0;
+        var timer;
+        for(var i= 0; i<aLi.length;i++){
+            aLi[i].index=i;
+            aLi[i].onmouseover = function () {
+                iNowindex = this.index;
+                changeImg()
+                // for(var j = 0;j <aLi.length; j++){
+                //    aLi[j].className= '';
+                //    aImg[j].className='';
+                // }
+                // this.className = 'nav-selected';
+                // aImg[this.index].className='selected';
+            }
+        }
+        oPrev.onclick = function(){
+            iNowindex--;
+            if(iNowindex==-1){
+                iNowindex = aLi.length-1;
+            }
+            changeImg()
+            // for(var i = 0; i<aLi.length; i++){
+            //     aLi[i].className = '';
+            //     aImg[i].className = '';
+            // }
+            // aLi[iNowindex].className='nav-selected';
+            // aImg[iNowindex].className='selected';
+        };
+        oNext.onclick = function(){
+            iNowindex++;
+            if(iNowindex==aLi.length){
+                iNowindex = 0;
+            }
+            changeImg()
+            // for(var j =0;j<aLi.length;j++){
+            //     aLi[j].className='';
+            //     aImg[j].className='';
+            // }
+            // aLi[iNowindex].className='nav-selected';
+            // aImg[iNowindex].className = 'selected'
+        };
+
+        oPrev.onselectstart = oNext.onselectstart = function(){
+            return false;
+        };
+
+        oContainer.onmouseover = function(){
+            clearInterval(timer);
+        };
+        oContainer.onmouseout = function(){
+            // timer = setInterval(function(){
+            //     oNext.onclick();
+            // },1000)
+            play()
+        };
+        play();
+        // var timer = setInterval(function(){
+        //     oNext.onclick();
+        // },1000);
+        function changeImg(){
+            for(var j =0;j<aLi.length;j++){
+                aLi[j].className='';
+                aImg[j].className='';
+            }
+            aLi[iNowindex].className='nav-selected';
+            aImg[iNowindex].className = 'selected'
+        }
+        function play(){
+            timer = setInterval(function(){
+                oNext.onclick();
+            },1000);
+        }
+        /*oPrev.onclick = oNext.onclick = function(){
+            if(this === oPrev){
+                iNowindex--;
+                if(iNowindex == -1){
+                    iNowindex = aLi.length - 1;
+                }
+            }else{
+                iNowindex++;
+                if(iNowindex == aLi.length){
+                    iNowindex = 0;
+                }
+            }
+        }*/
+    </script>
+</body>
+</html>
