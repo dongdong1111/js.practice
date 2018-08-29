@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #small , #big{
+            width: 400px;
+            height: 400px;
+            position: relative;
+            float: left;
+        }
+        #big{
+            overflow: hidden;
+            display: none;
+        }
+        #drag{
+            width: 200px;
+            height: 200px;
+            background: #fff;
+            opacity: .5;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+        #big-img{
+            position: absolute;
+            top: 100px;
+            left: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="small">
+        <img src="images/6.jpg" alt="">
+        <div id="drag"></div>
+    </div>
+    <div id="big">
+        <img src="images/5.jpg" alt="" id="big-img">
+    </div>
+
+    <script>
+        var oSmall = document.getElementById('small');
+        var oDrag = document.getElementById('drag');
+        var oBig = document.getElementById('big');
+        var oBigImg = document.getElementById('big-img')
+        oSmall.onmouseover = function () {
+            oDrag.style.display = 'block';
+            oBig.style.display = 'block';
+        };
+        oSmall.onmouseout = function () {
+            oDrag.style.display = 'none';
+            oBig .style.display = 'none'
+        };
+        oSmall .onmousemove = function (ev) {
+            ev = ev ||window.event;
+            /*oDrag.style.top = ev.clientY - oDrag.offsetHeight / 2 + 'px';
+            oDrag.style.left = ev.clientX - oDrag.offsetWidth / 2 + 'px';*/
+            var top = ev.clientY - oDrag.offsetHeight / 2  ;
+            var left = ev. clientX - oDrag.offsetWidth / 2 ;
+            //判断Drag的位置边界
+            if (top < 0 ){
+                top = 0;
+            }
+            if (left < 0){
+                left = 0;
+            }
+            var leftMax = oSmall.offsetWidth - oDrag.offsetWidth;
+            var topMax = oSmall.offsetHeight - oDrag.offsetHeight;
+            if (left > leftMax){
+                left = leftMax;
+            }
+            if (top > topMax){
+                top = topMax;
+            }
+            oDrag.style.top = top + 'px';
+            oDrag.style.left = left + 'px';
+            //drag移动的百分比
+            var dragDansX = oDrag.offsetLeft / leftMax;
+            var dragDanxY = oDrag.offsetTop / topMax;
+
+            //设置大图片的位置
+            oBigImg.style.left = -dragDansX * (oBigImg.offsetWidth - oBig.offsetWidth) + 'px';
+            oBigImg.style.top = - dragDanxY * (oBigImg.offsetHeight - oBig.offsetHeight) + 'px';
+        }
+    </script>
+</body>
+</html>
