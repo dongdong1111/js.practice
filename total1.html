@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>你好！世界</h1>
+
+<script>
+    var a = 123;
+    var b = 234;
+    var c = a;
+</script>
+<script>
+/*    //运算操作符
+    var a = 123;
+    var b = 456;
+    var c = a + b;
+
+    var a = 1 + 2;
+    document.write(a);
+
+    var a = "a" + "b";//字符串拼接
+    document.write(a);
+
+
+    var a = 133;
+    var b = 456;
+    a = a + b;
+    b = a - b;
+    a = a - b;
+    document.write(a,b);*/
+
+    //比较运算符
+   // 字符串比较是比较 asc顺序
+    var score = parseInt(window.prompt ('input'));
+
+    //90-100 alibaba
+    //80-90 tencent toutiao meituan 滴滴
+    //70-80 baidu eleme xiecheng 58赶集
+    //60-70 蘑菇街
+    //60以下  你赶紧放羊去吧！！！
+
+    if (score > 90 && score <= 100){
+        document.write('alibaba');
+    }else if(score > 80 && score <= 90){
+        document.write('tentent');
+    }else if(score > 70 && score <= 80){
+        document.write('baidu');
+    }else if(score > 60 && score <= 70){
+        document.write('蘑菇街');
+    }else if(score <= 60){
+        document.write('你赶紧放羊去吧！！！');
+    }
+
+
+
+</script>
+</body>
+</html>
